@@ -10,6 +10,12 @@ import UIKit
 
 class ViewController: UIViewController, TapGestureRecognizer {
     
+    private var gameScore = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(gameScore)"
+        }
+    }
+    
     func tapOccurred(card: SetCard) {
         let chooseResult = game.chooseCard(card)
         
@@ -20,11 +26,13 @@ class ViewController: UIViewController, TapGestureRecognizer {
             cardViewContainer.highlightCards(Array(game.selectedCards), withColor: UIColor.red)
             cardViewContainer.shakeCards(Array(game.selectedCards), onCompletion: {[unowned self] in
                 self.cardViewContainer.unhighlightCards(Array(self.game.selectedCards))})
+            gameScore += -1
         case (.match, let newCards):
             cardViewContainer.unhighlightCards(Array(game.selectedCards))
             cardViewContainer.replaceCards(Array(game.selectedCards), with: newCards, additionalTaskBetweenRemovalAndAddition: {
                 self.hideDealButtonIfCardDeckIsEmpty()
             })
+            gameScore += 3
         }
     }
     
@@ -54,10 +62,14 @@ class ViewController: UIViewController, TapGestureRecognizer {
         
         cardViewContainer.superview?.sendSubview(toBack: cardViewContainer)
         //self.dealButton.superview?.bringSubview(toFront: self.dealButton)
-        
-        cardViewContainer.addCards(cards: game.cardsInPlay, additionalTaskJustBeforeAddition: {
-            self.hideDealButtonIfCardDeckIsEmpty()
-        })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.cardViewContainer.addCards(cards: self.game.cardsInPlay, additionalTaskJustBeforeAddition: {
+                self.hideDealButtonIfCardDeckIsEmpty()
+            })
+        }
     }
     
     @IBOutlet weak var cardViewContainer: UICardContainerView!
@@ -117,15 +129,18 @@ class ViewController: UIViewController, TapGestureRecognizer {
     
     @IBAction func restartButton(_ sender: UIButton) {
         game = GameOfSet(numberOfCardsToStart: 12)
+        cardViewContainer.stopAnyOngoingActivity()
         cardViewContainer.subviews.forEach{$0.removeFromSuperview()}
         cardViewContainer.addCards(cards: game.cardsInPlay, additionalTaskJustBeforeAddition: {
             self.hideDealButtonIfCardDeckIsEmpty()
         })
         
         restoreButtonsToOriginalState()
+        gameScore = 0
     }
     
     @IBAction func cheatButton(_ sender: UIButton) {
+        gameScore += -2
         let cheatResult = game.cheat()
         if cheatResult.0 {
             cardViewContainer.highlightCards(cheatResult.1, withColor: UIColor.magenta)

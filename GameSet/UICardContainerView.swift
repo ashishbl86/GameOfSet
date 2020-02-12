@@ -17,6 +17,8 @@ class UICardContainerView: UIView {
     weak var firstMatchedCard: UIView?
     lazy var dynamicAnimator = UIDynamicAnimator(referenceView: superview!)
     lazy var cardBehaviour = CardBehavior(dynamicAnimator: dynamicAnimator)
+    weak var cardRemovalTimer: Timer?
+    weak var cardAdditionTimer: Timer?
     
     private func getViewsForCards(_ cards: [SetCard]) -> ([UICardView], [Int]) {
         let cardViews = subviews.filter {
@@ -92,7 +94,7 @@ class UICardContainerView: UIView {
     {
         var newViews = [UICardView]()
         cards.forEach{card in
-            let cardView = UICardView(frame: getDeckRect(), card: card, gestureRecognizer: cardTapReceiver) //Frame will be set at resizing
+            let cardView = UICardView(frame: getDeckRect(), card: card, gestureRecognizer: cardTapReceiver)
             cardView.transform = CGAffineTransform.identity.rotated(by: CGFloat.pi/2)
             cardView.isHidden = true
             addSubview(cardView)
@@ -130,7 +132,11 @@ class UICardContainerView: UIView {
         {
             grid.frame = bounds
             resizeExistingCards()
-            // FIXME: Also update the frames of the new cards to the deck rect.
+            
+            let hiddenCards = subviews.filter { $0 is UICardView && $0.isHidden }
+            hiddenCards.forEach {
+                $0.center = getDeckRect().center
+            }
         }
     }
 
@@ -181,7 +187,7 @@ class UICardContainerView: UIView {
         let discardRect = cardSuperview.convert(getDiscardCardThrowRect(), from: self)
         cardsViews.forEach{view in
             cardBehaviour.addItem(view)
-            Timer.scheduledTimer(withTimeInterval: timeDurationForDynamicAnimation, repeats: false, block: {timer in
+            cardRemovalTimer = Timer.scheduledTimer(withTimeInterval: timeDurationForDynamicAnimation, repeats: false, block: {timer in
                 self.cardBehaviour.removeItem(view)
                 UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.8, delay: 0, options: [.curveEaseOut], animations: {
                     view.center = discardRect.center
@@ -226,12 +232,13 @@ class UICardContainerView: UIView {
         var successiveDelay = 0.0
         views.forEach{view in
             if let indexInSuperView = self.subviews.firstIndex(of: view) {
-                Timer.scheduledTimer(withTimeInterval: successiveDelay, repeats: false, block: {timer in
+                cardAdditionTimer = Timer.scheduledTimer(withTimeInterval: successiveDelay, repeats: false, block: {timer in
                     view.isHidden = false
                     UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.8, delay: 0, options: [.curveEaseIn], animations: {
-                        let targetFrame = self.grid[indexInSuperView]!
-                        view.transform = CGAffineTransform.identity.scaledBy(x: targetFrame.width/view.bounds.width, y: targetFrame.height/view.bounds.height)
-                        view.center = targetFrame.center
+                        if let targetFrame = self.grid[indexInSuperView] {
+                            view.transform = CGAffineTransform.identity.scaledBy(x: targetFrame.width/view.bounds.width, y: targetFrame.height/view.bounds.height)
+                            view.center = targetFrame.center
+                        }
                     }
                         , completion: {position in
                             if let targetFrame = self.grid[indexInSuperView] {
@@ -245,6 +252,16 @@ class UICardContainerView: UIView {
                 })
             }
             successiveDelay += 0.3
+        }
+    }
+    
+    func stopAnyOngoingActivity(){
+        cardRemovalTimer?.invalidate()
+        cardAdditionTimer?.invalidate()
+        superview?.subviews.forEach{ subview in
+            if subview is UICardView {
+                subview.removeFromSuperview()
+            }
         }
     }
 }
