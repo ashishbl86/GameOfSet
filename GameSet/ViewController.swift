@@ -50,6 +50,9 @@ class ViewController: UIViewController, TapGestureRecognizer {
         //scoreLabel.backgroundColor = UIColor.clear
         //scoreLabel.layer.backgroundColor = scoreLabelColor?.cgColor
         scoreLabel.layer.cornerRadius = scoreLabel.bounds.width * 0.1
+        otherButtons.forEach { button in
+            button.layer.cornerRadius = button.bounds.width * 0.1
+        }
         
         cardViewContainer.grid.frame = cardViewContainer.bounds
         cardViewContainer.getNewCardPickupRect = {[weak self] in
@@ -126,6 +129,8 @@ class ViewController: UIViewController, TapGestureRecognizer {
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var dealButton: UIButton!
+    @IBOutlet var otherButtons: [UIButton]!
+    
     
     @IBAction func restartButton(_ sender: UIButton) {
         game = GameOfSet(numberOfCardsToStart: 12)
