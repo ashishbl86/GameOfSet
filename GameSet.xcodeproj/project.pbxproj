@@ -24,7 +24,15 @@
 		FF039A03215B237900157FE7 /* UICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardView.swift; sourceTree = "<group>"; };
 		FF039A05215B252100157FE7 /* UICardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardContainerView.swift; sourceTree = "<group>"; };
 		FF039A07215C6D4800157FE7 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		FF229EEF2404C916002BFA95 /* SetSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SetSuccess.png; sourceTree = "<group>"; };
+		FF229EF02404C916002BFA95 /* GameStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameStart.png; sourceTree = "<group>"; };
+		FF229EF12404C916002BFA95 /* Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Normal.png; sourceTree = "<group>"; };
+		FF229EF22404C916002BFA95 /* SetFailure.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = SetFailure.gif; sourceTree = "<group>"; };
+		FF229EF32404C916002BFA95 /* SetSuccess.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = SetSuccess.gif; sourceTree = "<group>"; };
+		FF229EF42404C916002BFA95 /* GameStart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = GameStart.gif; sourceTree = "<group>"; };
+		FF229EF52404C916002BFA95 /* AdditionOfCards.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = AdditionOfCards.gif; sourceTree = "<group>"; };
 		FF2687C7218BE3CD004DEEA0 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
+		FFA1D8E623F691AF00DFCE03 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FFA5CD48212F02F1008CEB34 /* GameSet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameSet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFA5CD4B212F02F1008CEB34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFA5CD4D212F02F1008CEB34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,9 +55,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF229EEE2404C916002BFA95 /* ScreenCaptures */ = {
+			isa = PBXGroup;
+			children = (
+				FF229EEF2404C916002BFA95 /* SetSuccess.png */,
+				FF229EF02404C916002BFA95 /* GameStart.png */,
+				FF229EF12404C916002BFA95 /* Normal.png */,
+				FF229EF22404C916002BFA95 /* SetFailure.gif */,
+				FF229EF32404C916002BFA95 /* SetSuccess.gif */,
+				FF229EF42404C916002BFA95 /* GameStart.gif */,
+				FF229EF52404C916002BFA95 /* AdditionOfCards.gif */,
+			);
+			path = ScreenCaptures;
+			sourceTree = "<group>";
+		};
 		FFA5CD3F212F02F1008CEB34 = {
 			isa = PBXGroup;
 			children = (
+				FFA1D8E623F691AF00DFCE03 /* README.md */,
+				FF229EEE2404C916002BFA95 /* ScreenCaptures */,
 				FFA5CD4A212F02F1008CEB34 /* GameSet */,
 				FFA5CD49212F02F1008CEB34 /* Products */,
 			);
