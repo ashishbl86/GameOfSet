@@ -56,16 +56,17 @@ The graph created on Desmos for squiggly is available [here](https://www.desmos.
 
 Normal state|Game Starting|Set formed
 ---|---|---
-![](./ScreenCaptures/Normal.png)|![](./ScreenCaptures/GameStart.png)|![](./ScreenCaptures/SetSuccess.png)
+![Image of Normal game state](./ScreenCaptures/Normal.png)|![Image of game starting](./ScreenCaptures/GameStart.png)|![Image of Set formed successfully](./ScreenCaptures/SetSuccess.png)
 
 #### GIFs
+###### NOTE: GIFs are large in size, so it may take a little while for them to load
 Game Starting|Addition of more cards
 ---|---
-![](./ScreenCaptures/GameStart.gif)|![](./ScreenCaptures/AdditionOfCards.gif)
+![GIF of game starting](./ScreenCaptures/GameStart.gif)|![GIF of adding more cards](./ScreenCaptures/AdditionOfCards.gif)
 
 Set formed|Failed to form a Set
 ---|---
-![](./ScreenCaptures/SetSuccess.gif)|![](./ScreenCaptures/SetFailure.gif)
+![GIF of Set formed successfully](./ScreenCaptures/SetSuccess.gif)|![GIF of Set formation failure](./ScreenCaptures/SetFailure.gif)
 
 ## Project Status
 The project is still not fully complete and might also have some bugs. I plan to work more on the animation aspects and bring in even cooler animations and effects.
