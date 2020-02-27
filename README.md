@@ -23,33 +23,50 @@ And if the cards don't form a set, then you will lose a point and the selected c
 At any time, if you are unable to find a Set, then you can use the **?** button to find a set but it will cost you 2 points.
 Use the **⟲** button to restart the game at any point.
 
-## Screenshots
-
-<Game starting with cards flying out>
-<Addiiton of cards with cards resizing before addition>
-<Correct Set with cards flying away and new cards coming>
-<Incorrect set and shake animation>
-
 ## General Info
 This project started as implementation of an assignment in an [iOS Development course on YouTube](https://www.youtube.com/playlist?list=PLPA-ayBrweUzGFmkT_W65z64MoGnKRZMq).
 
-Basic features related to animations (and other UIKit features in general) that I have implemented here are:
+The features related to animations (and other UIKit features in general) that I have implemented here are:
 * Timers
 * Affine Transformations
-* UIViewPropertyAnimator
-* UIView transitions
+* Animations using **UIViewPropertyAnimator** and **UIView transitions**
+* Dynamic animations using **UIKit Dynamics**
 * Bezier paths
 
 ### Highlight of this project
 The thing I want to specially highlight is the use of Bezier paths to **draw** the shapes and not use any images. As expected, this results in beautiful and sharp graphics of the shapes.
 
-Drawing the squiggly shape was particularly difficult as it required using four cubic Bézier curves. I found it impossible to create the shape directly in the app as you can't experiment with control points visually.
+Drawing the squiggly shape was particularly difficult as it required using **four cubic Bézier curves**. I found it impossible to create the shape directly in the app as I couldn't experiment with control points visually.
 
 To achieve that, I first created the shape on the popular online graphing application **Desmos**. There I could just drag around the control points and get the perfect squiggly shape.
 
-Once I had the numbers for the control points, it became straightforward to create the shape in the app. The graph created on Desmos for squiggly is available [here](https://www.desmos.com/calculator/7xa38awbsv).
+Once I had the numbers for the control points, it became straightforward to create the shape in the app.
+
+The graph created on Desmos for squiggly is available [here](https://www.desmos.com/calculator/7xa38awbsv).
+
+## Screenshots
+
+<!--
+<p align="left">
+<img src="./ScreenCaptures/GameStart.png" width="33%" />
+<img src="./ScreenCaptures/Normal.png" width="33%" />
+<img src="./ScreenCaptures/SetSuccess.png" width="33%" />
+</p>
+-->
+
+Normal state|Game Starting|Set formed
+---|---|---
+![](./ScreenCaptures/Normal.png)|![](./ScreenCaptures/GameStart.png)|![](./ScreenCaptures/SetSuccess.png)
+
+#### GIFs
+Game Starting|Addition of more cards
+---|---
+![](./ScreenCaptures/GameStart.gif)|![](./ScreenCaptures/AdditionOfCards.gif)
+
+Set formed|Failed to form a Set
+---|---
+![](./ScreenCaptures/SetSuccess.gif)|![](./ScreenCaptures/SetFailure.gif)
 
 ## Project Status
 The project is still not fully complete and might also have some bugs. I plan to work more on the animation aspects and bring in even cooler animations and effects.
 There is tremendous scope to add more features like multi-player, time bound scoring, scoring history etc.
-
